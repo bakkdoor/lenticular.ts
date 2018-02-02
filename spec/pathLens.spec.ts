@@ -182,6 +182,16 @@ describe('Path Parser', () => {
         const expectedPath = JSON.stringify([{attribute: 'list'}, {attribute: 'items'}, {variableIndexPosition: 0}, {attribute: 'name'}]);
         expect(actualPath).toEqual(expectedPath);
     });
+
+    it('even works with arrow functions with return inside', () => {
+        const path = l.pathFromExpression((d: IData, i: number) => {
+            return d.list.items[i].name
+        });
+
+        const actualPath = JSON.stringify(path);
+        const expectedPath = JSON.stringify([{ attribute: 'list' }, { attribute: 'items' }, { variableIndexPosition: 0 }, { attribute: 'name' }]);
+        expect(actualPath).toEqual(expectedPath);
+    })
 });
 
 interface IData {
